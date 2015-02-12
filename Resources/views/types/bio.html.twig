@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+	<h1 class="header">Bio</h1>
+	<div class="image">
+		{% for document in nodeSource.images %}
+
+			{% set imageMetas = document.documentTranslations.first %}
+			<figure class="uk-thumbnail">
+				{{ document.viewer.documentByArray(themeServices.imageFormats.thumbnail)|raw }}
+				<figcaption>{{ imageMetas.name }} — {{ imageMetas.copyright }}</figcaption>
+			</figure>
+		{% endfor %}
+	</div>
+	{{ nodeSource.bio|markdown }}
+{% endblock %}

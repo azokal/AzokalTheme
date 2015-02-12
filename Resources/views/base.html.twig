@@ -54,8 +54,11 @@
         <meta name="twitter:image" content="{{ head.baseUrl }}{{ head.resourcesUrl }}img/share.png" />
 
         {# --- Styles --- #}
-        <!-- <link rel="stylesheet" href="{{ head.resourcesUrl }}css/vendors/uikit/uikit.gradient.min.css" />
-        <link rel="stylesheet" href="{{ head.resourcesUrl }}css/vendors/uikit/addons/uikit.addons.min.css" /> -->
+        <link rel="stylesheet" href="{{ head.resourcesUrl }}css/vendor/uikit/uikit.almost-flat.min.css" />
+        <link rel="stylesheet" href="{{ head.resourcesUrl }}css/vendor/uikit/addons/dotnav.almost-flat.min.css" />
+        <link rel="stylesheet" href="{{ head.resourcesUrl }}css/vendor/uikit/addons/slidenav.almost-flat.min.css" />
+        <link rel="stylesheet" href="{{ head.resourcesUrl }}css/vendor/uikit/addons/slideshow.almost-flat.min.css" />
+        <link rel="stylesheet" href="{{ head.resourcesUrl }}dist/semantic.min.css" />
         <link rel="stylesheet" href="{{ head.resourcesUrl }}public{{ themeServices.grunt.staticAssets.global.css[0] }}" />
         <link rel="stylesheet" href="{{ path('FontFaceCSS', {"token": head.fontToken}) }}" />
 
@@ -68,13 +71,33 @@
         <!--[if lt IE 8]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+        {% block header %}
+        <div id="header">
+            <div id="text">
+                <h1>{{header.title}}</h1>
+                <p>{{header.subtitle}}</p>
+            </div>
+        </div>
+        {% endblock %}
 
-        {% block header %}{% endblock %}
-
-        {% include 'modules/navigation.html.twig' %}
+        <div class="ui two column sticky centered grid" id="nav">
+            <div class="column">
+                {% include 'modules/navigation.html.twig' %}
+            </div>
+        </div>
 
         {# Add your site or application content here #}
+        <div id="body">
         {% block content %}{% endblock %}
+    </div>
+        {% block footer %}
+        <footer id="footer">
+            <div id="text">
+                <p>© {{"now"|date('Y')}} Maxime Constantinian</p>
+                <a href="http://roadiz.io/" target="_blank">Made with <i class="icon-roadiz"></i></a>
+            </div>
+        </footer>
+        {% endblock %}
 
         {# Scripts #}
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -90,7 +113,10 @@
             {# <script src="{{ head.resourcesUrl }}js/vendor/jquery.history.js"></script> #}
         {% endif %}
 
-        {# <script src="{{ head.resourcesUrl }}js/vendor/uikit.min.js"></script> #}
+        <script src="{{ head.resourcesUrl }}js/vendor/uikit.min.js"></script>
+        <script src="{{ head.resourcesUrl }}js/vendor/slideshow.min.js"></script>
+        <script src="{{ head.resourcesUrl }}js/vendor/slideshow-fx.min.js"></script>
+        <script src="{{ head.resourcesUrl }}dist/semantic.min.js"></script>
 
         {% if head.devMode %}
             <script src="{{ head.resourcesUrl }}js/vendor/cookiechoices.js"></script>

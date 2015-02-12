@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+{% macro generateSpan(name, len, color) %}
+    {% set tab = [name[:len], name[len:]] %}
+    <span class="az-{{color}}">{{tab[0]}}</span>{{tab[1]}}
+{% endmacro %}
+
+{% import _self as title %}
+<div class="ui stackable two column centered grid block" id="Resume">
+    <div class="column">
+        <div class="ui stackable right aligned grid">
+            <div class="four wide column ui" id="menu">
+                <div>
+                    <h1>about</h1>
+                </div>
+                    <p>{{nodeSource.about|markdown}}</p>
+                    <a class="ui small image label" href="mailto:{{ nodeSource.email }}">
+                        <i class="mail small alternate icon"></i>
+                        {{ nodeSource.email }}
+                    </a>
+                    <a class="ui image label" href="http://github.com/{{ nodeSource.github }}">
+                        <i class="github alternate icon"></i>
+                        {{ nodeSource.github }}
+                    </a>
+                <div>
+                    <h1>languages</h1>
+                    <p>{{nodeSource.languages|markdown}}</p>
+                </div>
+                <div>
+                    <h1>programming</h1>
+                    <p>{{nodeSource.programming|markdown}}</p>
+                </div>
+                <div>
+                    <h1>library</h1>
+                    <p>{{nodeSource.library|markdown}}</p>
+                </div>
+                <div>
+                    <h1>tools</h1>
+                    <p>{{nodeSource.tools|markdown}}</p>
+                </div>
+            </div>
+            <div class="left aligned twelve wide column">
+                <div>
+                    <h1>{{ title.generateSpan('interests', 3, 'cyan') }}</h1>
+                    <p>{{nodeSource.interests|markdown}}</p>
+                </div>
+                {% for id, n in nodes %}
+                {% set color = ['purple', 'orange']%}
+                <div class="az-info">
+                    <h1>{{ title.generateSpan(n.nodeSources.first.title, 3, color[id]) }}</h1>
+                    {% for child in n.children %}
+                    <div class="ui grid">
+                        <div class="three wide column">
+                            {{child.nodeSources.first.year}}
+                        </div>
+                        <div class="az-info-name eight wide column">
+                            {{child.nodeSources.first.name}}
+                        </div>
+                        <div class="az-info-information five wide column ui right aligned small">
+                            <p class="az-info-information">{{child.nodeSources.first.information}}</p>
+                        </div>
+                        <div class="three wide column">
+
+                        </div>
+                        <div class="thirteen wide column">
+                            {{child.nodeSources.first.description|markdown}}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ui two column centered grid az-proj block" id="Applications">
+    <div class="column">
+        <div class="ui grid">
+            <div class="sixteen column">
+                <h1>{{ title.generateSpan("applications", 3, "green") }}</h1>
+                <div class="uk-slidenav-position uk-container-center" data-uk-slideshow>
+                    <ul class="uk-slideshow">
+                        {% for proj in project.handler.children(null, null, securityContext) %}
+                        <li>
+                            <div class="uk-panel uk-panel-box">
+                                <figure class="iframe-responsive-wrapper">
+                                    {{ proj.document[0].viewer.documentByArray({ 'width': 853, 'height': 480, 'crop': '853x480', 'embed': false})|raw }}
+                                    {% if proj.document[0].embed %}
+                                        {{ proj.document[0].viewer.documentByArray({ 'width': 853, 'height': 480, 'crop': '853x480', 'embed': true})|raw }}
+                                    {% endif %}
+                                </figure>
+                                <div class="az-desc">
+                                    <h2>{{proj.title}}</h2>
+                                    {{proj.description|markdown}}
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous" data-uk-slideshow-item="previous"></a>
+                    <a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slideshow-item="next"></a>
+                    <ul class="uk-dotnav uk-dotnav-contrast uk-position-bottom uk-text-center">
+                        {% for id, _ in project.handler.children(null, null, securityContext) %}
+                            <li data-uk-slideshow-item="{{id}}"><a href=""></a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

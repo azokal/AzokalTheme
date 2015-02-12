@@ -1,17 +1,17 @@
 {% if themeServices.navigation|length %}
-<nav class="uk-navbar uk-navbar-attached" id="main-navigation" data-active-node="{{ node.id }}">
+<div class="ui secondary pointing menu" id="main-navigation">
 
     {#
      #  Home with a node
      #}
     {% if home %}
-        <a href="{{ home.handler.url }}" class="uk-navbar-brand">{{ meta.siteName }}</a>
+        <a href="#{{home.nodeSources.first.title}}" class="item" data-uk-smooth-scroll>{{ home.nodeSources.first.title }}</a>
     {% endif %}
 
     {#
      # Main navigation
      #}
-	<ul class="uk-navbar-nav ">
+	<!-- <ul class="ui dropdown item"> -->
 		{% for cnode in themeServices.navigation %}
 			{% set source = cnode.nodeSources.first %}
 			{% include 'modules/navigationElement.html.twig' with {
@@ -21,6 +21,6 @@
                 'themeServices':themeServices
             } only %}
 		{% endfor %}
-	</ul>
-</nav>
+	<!-- </ul> -->
+</div>
 {% endif %}

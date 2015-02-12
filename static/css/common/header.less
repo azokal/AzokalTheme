@@ -7,3 +7,28 @@
  * Header styles
  */
 
+#header {
+    height: 200px;
+    display: block;
+    background-color: #424242;
+    text-align: center;
+    font-size: 200%;
+    &::before {
+        content:'';
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        height: 200px;
+    }
+    #text {
+        margin: 0 auto;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        h1, p {
+            margin: 0;
+            padding: 0;
+            color: #d4d4d4;
+        }
+    }
+ }

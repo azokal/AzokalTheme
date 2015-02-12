@@ -120,6 +120,8 @@ class AzokalThemeApp extends FrontendController
         $this->assignation['head']['googleClientId'] = SettingsBag::get('google_client_id');
         $this->assignation['head']['maps_style'] = SettingsBag::get('maps_style');
         $this->assignation['head']['themeVersion'] = static::VERSION;
+        $this->assignation['header']['title'] = SettingsBag::get('header_title');
+        $this->assignation['header']['subtitle'] = SettingsBag::get('header_subtitle');
 
         // Get session messages
         $this->assignation['session']['messages'] = $this->getService('session')->getFlashBag()->all();
@@ -138,10 +140,17 @@ class AzokalThemeApp extends FrontendController
 
         $parent = $this->themeContainer['node.home'];
 
+        $nodeType = $this->getService('nodeTypeApi')
+                         ->getBy(["name" => "Info"]);
+
         if ($parent !== null) {
             return $this->getService('nodeApi')
                         ->getBy(
-                            array('parent' => $parent),
+                            [
+                                'parent' => null,
+                                'home' => false,
+                                'nodeType' => ["!=", $nodeType]
+                            ],
                             array('position' => 'ASC')
                         );
         }

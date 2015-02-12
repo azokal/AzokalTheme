@@ -34,10 +34,10 @@ AzokalTheme.onDocumentReady = function(e) {
 AzokalTheme.init = function(){
     var _this = this;
 
-    // Selectors  
+    // Selectors
     _this.$window = $(window);
     _this.$body = $('body');
-    
+
     // Events
     // _this.$window.on('resize', $.proxy(_this.resize, _this));
     // _this.$window.trigger('resize');
@@ -51,7 +51,7 @@ AzokalTheme.init = function(){
 AzokalTheme.resize = function(){
     var _this = this;
 
-    
+
 };
 
 
@@ -61,3 +61,8 @@ AzokalTheme.resize = function(){
  * ============================================================================
  */
 $(document).ready(AzokalTheme.onDocumentReady);
+$('.ui.sticky')
+  .sticky({
+    context: '#body'
+  })
+;

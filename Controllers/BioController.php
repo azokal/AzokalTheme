@@ -1,13 +1,4 @@
 <?php
-/*
- * Copyright REZO ZERO 2014
- *
- * Description
- *
- * @file ExampleController.php
- * @copyright REZO ZERO 2014
- * @author Ambroise Maupate
- */
 
 namespace Themes\AzokalTheme\Controllers;
 
@@ -19,9 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * ExampleController class
+ * BioController class
  */
-class ExampleController extends AzokalThemeApp
+class BioController extends AzokalThemeApp
 {
     /**
      * {@inheritdoc}
@@ -37,7 +28,7 @@ class ExampleController extends AzokalThemeApp
 
         $this->getService('stopwatch')->start('twigRender');
         return new Response(
-            $this->getTwig()->render('types/example.html.twig', $this->assignation),
+            $this->getTwig()->render('types/bio.html.twig', $this->assignation),
             Response::HTTP_OK,
             array('content-type' => 'text/html')
         );
