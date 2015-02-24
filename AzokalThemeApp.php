@@ -48,9 +48,10 @@ class AzokalThemeApp extends FrontendController
          * Get language from static route
          */
         $translation = $this->bindLocaleFromRoute($request, $_locale);
-        $home = $this->getService('em')
-                     ->getRepository('RZ\Roadiz\Core\Entities\Node')
-                     ->findHomeWithTranslation($translation);
+        $home = $this->getHome();
+        // $this->getService('em')
+        //              ->getRepository('RZ\Roadiz\Core\Entities\Node')
+        //              ->findHomeWithTranslation($translation);
 
         $this->prepareThemeAssignation($home, $translation);
         return $this->handle($request);
@@ -84,9 +85,10 @@ class AzokalThemeApp extends FrontendController
         };
 
         $this->themeContainer['node.home'] = function ($c) {
-            return $this->getService('em')
-                 ->getRepository('RZ\Roadiz\Core\Entities\Node')
-                 ->findHomeWithTranslation($this->translation);
+            return $this->getHome();
+            // $this->getService('em')
+            //      ->getRepository('RZ\Roadiz\Core\Entities\Node')
+            //      ->findHomeWithTranslation($this->translation);
         };
 
         $this->themeContainer['imageFormats'] = function ($c) {
@@ -147,8 +149,7 @@ class AzokalThemeApp extends FrontendController
             return $this->getService('nodeApi')
                         ->getBy(
                             [
-                                'parent' => null,
-                                'home' => false,
+                                'parent' => $this->getRoot(),
                                 'nodeType' => ["!=", $nodeType]
                             ],
                             array('position' => 'ASC')

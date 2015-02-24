@@ -1,0 +1,16 @@
+---
+name: "RZ Azokal theme"
+author: "Maxime Constantinian"
+copyright: "Maxime Constantinian"
+themeDir: "AzokalTheme"
+supportedLocale:
+    - "en"
+    - "fr"
+versionRequire: "0.4.1"
+importFiles:
+    roles: []
+    groups: []
+    settings: []
+    nodetypes: []
+    tags: []
+    nodes: []

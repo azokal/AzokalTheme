@@ -39,7 +39,7 @@ class CVController extends AzokalThemeApp
         $nodes = $this->getService('nodeApi')->getBy(
             [
                 'translation' => $translation,
-                'parent' => null,
+                'parent' => $this->getRoot(),
                 'home' => false,
                 'status' => Node::PUBLISHED,
                 'nodeType' => $nodeType
@@ -53,7 +53,8 @@ class CVController extends AzokalThemeApp
                 'translation' => $translation,
                 'node.home' => false,
                 'node.status' => Node::PUBLISHED,
-                'node.nodeType' => $nodeType
+                'node.nodeType' => $nodeType,
+                'node.parent' => $this->getRoot()
             ]
         );
 

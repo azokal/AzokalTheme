@@ -1,18 +1,18 @@
 # This route is required!
-homePage:
+AzokalHomePage:
     path:     /
     defaults: { _controller: Themes\AzokalTheme\AzokalThemeApp::homeAction }
-homePageLocale:
+AzokalHomePageLocale:
     path:     /{_locale}
     defaults: { _controller: Themes\AzokalTheme\AzokalThemeApp::homeAction }
     requirements:
         # Use every 2 letter codes (quick and dirty)
         _locale: "[a-z]{2}"
 
-sitemap:
+AzokalSitemap:
     path:     /sitemap.xml
     defaults: { _controller: Themes\AzokalTheme\Controllers\SitemapController::indexAction }
-defaultRemoveTrailingSlash:
+AzokalRemoveTrailingSlash:
     path: /{url}
     defaults: { _controller: Themes\AzokalTheme\AzokalThemeApp::removeTrailingSlashAction }
     requirements:

@@ -3,4 +3,4 @@
 {% else %}
 	{% set title = source.node.nodeName %}
 {% endif %}
-	<a class="{% if source.node.id == active.id or source.node.id == active.parent.id %}active{% endif %} item" href="#{{source.title}}" data-uk-smooth-scroll>{{ title }}</a>
+	<a class="item" href="#{{source.title}}" data-uk-smooth-scroll>{{ title }}</a>
